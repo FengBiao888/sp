@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>hello world!</h1>
+</body>
+</html>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+	$.ajax({
+		url: "http://video.huixiangmall.com/wx_config/data.php",
+	    async: false,
+	    data:{myurl:location.href.split('#')[0]},
+        dataType: "json",
+	    success: function(res) {
+	    	console.log(res);
+	        // var res = JSON.parse(result);
+	        wx.config({
+			    debug: true,
+			    appId: res.appId,
+			    timestamp: res.timestamp,
+			    nonceStr: res.nonceStr,
+			    signature: res.signature,
+			    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','hideMenuItems','showMenuItems',
+            'hideOptionMenu'] 
+			});
+			wx.ready(function(){
+			    wx.onMenuShareAppMessage({
+					title: '红包555',
+					desc: '快乐',
+					link: 'http://video.huixiangmall.com/aa.html',
+					imgUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3588772980,2454248748&fm=27&gp=0.jpg',
+					type: '',
+					dataUrl: '',
+					success: function () {
+						console.log('成功');
+					},
+					cancel: function () {
+					
+					}
+				});
+			}); 
+	    }    
+	});
+	
+</script>
